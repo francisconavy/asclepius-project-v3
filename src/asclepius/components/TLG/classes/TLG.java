@@ -1,8 +1,11 @@
 package asclepius.components.TLG.classes;
 
+import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.TLG.interfaces.ITLG;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,19 +14,15 @@ import java.util.Scanner;
 public class TLG extends TelegramLongPollingBot implements ITLG{
 
     public void onUpdateReceived(Update update) {
+        //instancia o hermes
+        Hermes hermes = new Hermes();
+        SendMessage message = hermes.call(update);
 
-        /*
-        SendMessage message = new SendMessage();
-        message.setText("Testando se deu certo");
-        message.setChatId(update.getMessage().getChatId());
-        System.out.println(update.getMessage().getText());
         try {
             execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-
-         */
     }
 
     public String getBotUsername() {
