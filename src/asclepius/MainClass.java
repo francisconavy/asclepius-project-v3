@@ -1,13 +1,18 @@
-
-import asclepius.components.Engine.interfaces.DSC.*;
-import asclepius.components.Engine.interfaces.Patient.*;
-import asclepius.components.Engine.classes.Patient.*;
-import asclepius.components.Engine.classes.DSC.*;
-import asclepius.components.Engine.interfaces.Doctor.*;
-import asclepius.components.Engine.classes.Doctor.*;
+import asclepius.components.Engine.classes.DSC.DataSetComponent;
+import asclepius.components.Engine.classes.Doctor.Doctor;
+import asclepius.components.Engine.classes.Patient.Patient;
+import asclepius.components.Engine.interfaces.DSC.IDataSet;
+import asclepius.components.Engine.interfaces.Doctor.IDoctor;
+import asclepius.components.Engine.interfaces.Patient.IPatient;
+import asclepius.components.TLG.classes.StartTLG;
 
 public class MainClass{
     public static void main(String[] args) {
+
+        //Iniciando a interface do telegram
+        StartTLG telegrambot = new StartTLG();
+        telegrambot.start();
+
         // instanciando o componente DataSet
         IDataSet dataset = new DataSetComponent();
         dataset.setDataSource("resources/zombie-health-spreadsheet-ml-training.csv");
