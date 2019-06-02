@@ -14,11 +14,12 @@ public class PatientPlus implements IPatientPlus {
     public static final String sim = "t";
     public static final String nao = "f";
     public static final String naoSei = "unkown";
+    public static final String defaultSource = "resources\\data\\test-cases-minus.csv";
     
     public PatientPlus(){
     /*Quando um IPatientPlus for instanciado, ele obrigatória e aleatoriamente recebe um conjunto de dados diretamente da base .CSV*/
         IDataSet DS = new DataSetComponentPlus();
-        DS.setDataSource("resources\\data\\test-cases-minus.csv");
+        DS.setDataSource(defaultSource);
         String attributes[] = DS.requestAttributes();
         String instances[][] = DS.requestInstances();
         randomData = new Random().nextInt(instances.length);
@@ -39,7 +40,7 @@ public class PatientPlus implements IPatientPlus {
     public String ask(String question) {
         /*Chamando um DS para adquirir o vetor de sintomas*/
         IDataSet DS = new DataSetComponentPlus();
-        DS.setDataSource("resources\\data\\test-cases-minus.csv");
+        DS.setDataSource(defaultSource);
         String attributes[] = DS.requestAttributes();
         
         /*Checando se o sintoma existe e gerando a posição counter do vetor que possui tal sintoma, se existit.*/
@@ -68,7 +69,7 @@ public class PatientPlus implements IPatientPlus {
     /*Se a condição do projeto "Casos não incluídos na tabela podem ser usados pelos docentes para testar o código" for considerada, esse método, finalAnswer, se torna inútil.*/
     public boolean finalAnswer(String answer) {
         IDataSet DS = new DataSetComponentPlus();
-        DS.setDataSource("resources\\data\\test-cases.csv");
+        DS.setDataSource(defaultSource);
         String instances[][] = DS.requestInstances();
         
         return answer.equalsIgnoreCase(instances[randomData][7]); //true ou false
