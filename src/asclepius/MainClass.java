@@ -2,6 +2,7 @@ package asclepius;
 
 import asclepius.components.Engine.classes.DoctorPlus.DoctorPlus;
 import asclepius.components.Engine.classes.PatientPlus.PatientPlus;
+import asclepius.components.Engine.classes.TBC.DiagMatrix;
 import asclepius.components.Engine.interfaces.DoctorPlus.IDoctorPlus;
 import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 

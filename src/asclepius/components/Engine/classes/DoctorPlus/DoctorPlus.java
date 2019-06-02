@@ -1,6 +1,7 @@
 package asclepius.components.Engine.classes.DoctorPlus;
 
 import asclepius.components.Engine.classes.TBC.DataTree;
+import asclepius.components.Engine.classes.TBC.DiagMatrix;
 import asclepius.components.Engine.interfaces.DoctorPlus.IDoctorPlus;
 import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 import asclepius.components.Engine.interfaces.TBC.ITree;
@@ -51,11 +52,23 @@ public class DoctorPlus implements IDoctorPlus {
                     break;
                 }
                 
-                //Chegagem de condição de parada antes da reiteração (perguntas vão parar aqui se uma das condições for cumprida)
-                /*if(diag.size() == 1){
-                    break;
-                }*/
-                
+                //Checagem de condição de parada antes da reiteração (perguntas vão parar aqui se uma das condições for cumprida)
+                if(DiagMatrix.verify(diag) == 0){ //Se há apenas 1 array não-vazio...
+                    /*for(int x = 0; x < diag.size(); x++) { //Percorre diag e retorna esse array-não vazio;
+                        if (diag.get(x).isEmpty() == false) {
+                            return diag.get(x);
+                        }
+                    }*/
+                    //VOCÊ PAROU AQUI - ENCONTRE UMA FORMA DE FAZER COM QUE AS CONDIÇÕES 1, 2 E 3 CAUSEM A QUEBRA DO LOOP E UMA RESPOSTA FINAL SEJA DADA PELO MÉDICO (NÃO TEM RELAÇÃO NENHUMA COM O MÉTODO finalAnswer() CRIADO PELO SANTANCHE).
+                }else if(DiagMatrix.verify(diag) == 1){ //Se há 2 ou mais arrays não-vazios...
+                    /**/
+                }else if(DiagMatrix.verify(diag) == 2){ //Se todos os arrays são vazios...
+                    /**/
+                }else{
+                    System.out.println("ERROR: Something went wrong during DiagMatrix's verify(); - bad list.");
+                }
+
+                //Print de teste; remover depois...
                 System.out.println(diag);
             }
             

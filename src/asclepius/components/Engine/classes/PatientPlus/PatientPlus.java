@@ -6,6 +6,7 @@ import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 import java.util.ArrayList;
 import java.util.Random;
 
+//Nota: Esse PatientPlus vai ser linkado com o Telegram...
 public class PatientPlus implements IPatientPlus {
     /*Esse ArrayList vai guardar os 7 sintomas (yes/no), os dados do IPatientPlus*/
     private ArrayList<String> dataList = new ArrayList<>();

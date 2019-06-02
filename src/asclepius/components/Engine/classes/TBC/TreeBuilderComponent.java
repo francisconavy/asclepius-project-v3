@@ -36,11 +36,15 @@ public class TreeBuilderComponent implements ITree {
         for(int x = 0; x < instances.length; x++){
             TreeNode curNode = headNode;
             for(int y = 0; y < instances[x].length - 1; y++){
-                if(y == ((instances[x].length - 1) - 1)){
+                if(y == ((instances[x].length - 1) - 1)){ //O segundo "-1" é por que o último andar da árvore são são os arrays de diagnósticos.
                     if(instances[x][y].equalsIgnoreCase("f")){
-                        curNode.addToListL(instances[x][instances[x].length - 1]);
+                        if(curNode.getListL().contains(instances[x][instances[x].length - 1]) == false) { //Para evitar diagnósticos duplicados...
+                            curNode.addToListL(instances[x][instances[x].length - 1]);
+                        }
                     }else if(instances[x][y].equalsIgnoreCase("t")){
-                        curNode.addToListR(instances[x][instances[x].length - 1]);
+                        if(curNode.getListR().contains(instances[x][instances[x].length - 1]) == false) { //Para evitar diagnósticos duplicados...
+                            curNode.addToListR(instances[x][instances[x].length - 1]);
+                        }
                     }
                 }else{
                     if(instances[x][y].equalsIgnoreCase("f")){
