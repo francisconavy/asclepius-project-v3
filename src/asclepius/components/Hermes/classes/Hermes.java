@@ -14,6 +14,15 @@ public class Hermes implements IHermes {
     private String fromOut;
     private String fromIn;
 
+    //private String[] dict = {"Sim", "sim", "Não", "não", "/start"};
+
+    public boolean inDict(String[] dict, String text){
+        for(int i = 0; i < dict.length; i++)
+            if(text.equals(dict[i]))
+                return true;
+        return false;
+    }
+
     public void connect(ITLG messenger){
         this.messenger = messenger;
     }
@@ -25,13 +34,28 @@ public class Hermes implements IHermes {
     public void takeOut(String text){
         fromOut = text;
         if(text.equalsIgnoreCase("/start")){
+            patient.hi();
+        }
+        else if(text.equalsIgnoreCase("Vamos!") || text.equalsIgnoreCase("Vamos")){
             patient.isReady();
         }
+        else if(text.equalsIgnoreCase("Sim")){
+            patient.symAnswer("t");
+        }
+        else if(text.equalsIgnoreCase("Não") || text.equalsIgnoreCase("Nao")){
+            patient.symAnswer("f");
+        }
+
     }
 
     public void takeIn(String text){
         fromIn = text;
-        messenger.sendText(text);
+        if(inDict(patient.getAttributes(), text)){
+            messenger.sendText("Você tem "+text+"?");
+        }
+        else {
+            messenger.sendText(text);
+        }
     }
 
     public String sendOut(){

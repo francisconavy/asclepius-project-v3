@@ -5,7 +5,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 public interface ITLG {
     void connect(Hermes hermes);
-    boolean inDict(String text);
     
 
     //pensar na real necessidade dessas funções abaixo na interface, pois são apenas do telegram.

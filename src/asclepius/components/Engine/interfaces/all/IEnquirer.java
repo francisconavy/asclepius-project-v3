@@ -1,5 +1,8 @@
 package asclepius.components.Engine.interfaces.all;
 
 public interface IEnquirer {
-    public void startInterview();
+    void startInterview();
+    void getDiagnosis();
+    void getDiagnosis(String answer);
+
 }

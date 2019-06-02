@@ -5,6 +5,7 @@ import asclepius.components.Hermes.interfaces.IHermes;
 
 public class Patient implements IPatient {
     private int patientN = 0;
+    private int actualSym = 0;
 
     private ITableProducer producer;
     private IEnquirer enquirer;
@@ -17,13 +18,14 @@ public class Patient implements IPatient {
         this.producer = producer;
 
         attributes = producer.requestAttributes();
-        String instances[][] = producer.requestInstances();
-
-        patientN = (int)(Math.random() * instances.length);
-        patientInstance = instances[patientN];
-
-        System.out.println("Patient selected: " + patientN);
-        System.out.println("Patient's disease: " + patientInstance[attributes.length - 1]);
+        patientInstance = new String[attributes.length -1];
+//        String instances[][] = producer.requestInstances();
+//
+//        patientN = (int)(Math.random() * instances.length);
+//        patientInstance = instances[patientN];
+//
+//        System.out.println("Patient selected: " + patientN);
+//        System.out.println("Patient's disease: " + patientInstance[attributes.length - 1]);
     }
 
     public void connect(IEnquirer enquirer){
@@ -34,20 +36,43 @@ public class Patient implements IPatient {
         this.hermes = hermes;
     }
 
-    public void isReady(){
-        System.out.println("Minha mãe disse que posso começar a consulta");
+    public String[] getAttributes(){
+        //System.out.println(attributes[0]);
+        return attributes;
+    }
+
+    public int getActualSym() {
+        return this.actualSym;
+    }
+
+    public void hi(){
         enquirer.startInterview();
     }
 
-    public String ask(String question) {
-        String result = "unknown";
+    public void isReady() {
+        enquirer.getDiagnosis();
+    }
 
+    public void symAnswer(String answer) {
+        enquirer.getDiagnosis(answer);
+    }
+
+    public void takeNote(String answer){
+        System.out.println(answer);
+        patientInstance[actualSym] = answer;
+        actualSym++;
+    }
+
+    public String[] getPatInst(){
+        return patientInstance;
+    }
+
+    public void ask(String question) {
         hermes.takeIn(question);
-//        for (int a = 0; a < attributes.length - 1; a++)
-//            if (question.equalsIgnoreCase(attributes[a]))
-//                result = (patientInstance[a].equals("t")) ? "t" : "f";
+    }
 
-        return result;
+    public void tellDisease(String disease){
+        hermes.takeIn(disease);
     }
 
     public boolean finalAnswer(String answer) {

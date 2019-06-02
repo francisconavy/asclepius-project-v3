@@ -12,8 +12,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TLG extends TelegramLongPollingBot implements ITLG{
-
-    private String[] dict = {"Sim", "sim", "Não", "não", "/start"};
     private Hermes hermes;
     private String text;
     private String name;
@@ -28,6 +26,7 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         this.name = update.getMessage().getFrom().getFirstName();
         this.chat_id = update.getMessage().getChatId();
 
+        System.out.println(text);
         hermes.takeOut(text);
 
 //        if(!inDict(text))
@@ -68,13 +67,6 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
 //        }
 
         //System.out.println(her.sendOut());
-    }
-
-    public boolean inDict(String text){
-        for(int i = 0; i < dict.length; i++)
-            if(text.equals(dict[i]))
-                return true;
-        return false;
     }
 
     public void sendText(String text){
