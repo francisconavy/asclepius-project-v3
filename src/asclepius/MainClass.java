@@ -16,25 +16,17 @@ public class MainClass{
 
     public static void main(String[] args) {
 
-        Hermes postman = new Hermes();
-
         //Iniciando a interface do telegram
         StartTLG telegramStarter = new StartTLG();
-
         ITLG telegrambot = telegramStarter.start();
 
+        //Instanciando o hermes
+        Hermes hermes = new Hermes();
+
         //conecta telegram ao hermes
-        telegrambot.setHermes(postman);
-
-
-        //talvez seja melhor criar um método start na classe TLG do que criar uma classe startTLG, pq se não teremos que
-        //dar request toda hora de coisas do verdadeiro objeto TLG por meio da StartTLG. Esse abaixo é só um caso, mas acho que
-        //varias outras coisas que a gente for fazer vão precisar disso
+        telegrambot.connect(hermes);
         //conecta hermes ao telegram
-        postman.connect(telegrambot);
-
-
-
+        hermes.connect(telegrambot);
 
         // instanciando o componente DataSet
         IDataSet dataset = new DataSetComponent();
@@ -44,10 +36,13 @@ public class MainClass{
         IPatient aPatient = new Patient();
 
         //conecta hermes ao paciente;
-        postman.connect(aPatient);
+        hermes.connect(aPatient);
 
         // conectando-o no componente DataSet
         aPatient.connect(dataset);
+
+        //conecta o paciente ao hermes
+        aPatient.connect(hermes);
 
         // instanciando o componente doutor louco
         IDoctor cDoctor = new Doctor();
@@ -58,8 +53,11 @@ public class MainClass{
         // conectando-o ao componente paciente
         cDoctor.connect(aPatient);
 
+        //conectando o paciente ao doutor
+        aPatient.connect(cDoctor);
+
         // executando a entrevista
-        cDoctor.startInterview();
+        //cDoctor.startInterview();
 
         //testes de funções, depois poderiamos criar uma pasta examples ou testes pra colocar funções de teste pra gente executar
         /*while(true){

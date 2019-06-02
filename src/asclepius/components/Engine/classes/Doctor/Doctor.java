@@ -47,6 +47,9 @@ public class Doctor implements IDoctor {
         answrs = new String[attributes.length-1];
         diagnostic = new String[attributes.length -1];
 
+        String vamos = responder.ask("Vamos iniciar a consulta?");
+        
+
         for (int a = 0; a < attributes.length - 1; a++){
             answrs[a] = responder.ask(attributes[a]);
             System.out.println("Question: " + attributes[a] + " - " + responder.ask(attributes[a]));

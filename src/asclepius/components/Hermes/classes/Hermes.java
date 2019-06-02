@@ -31,6 +31,7 @@ public class Hermes implements IHermes {
 
     public void takeIn(String text){
         fromIn = text;
+        messenger.sendText(text);
     }
 
     public String sendOut(){

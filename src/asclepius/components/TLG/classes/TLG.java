@@ -5,31 +5,30 @@ import asclepius.components.TLG.interfaces.ITLG;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class TLG extends TelegramLongPollingBot implements ITLG{
 
     private String[] dict = {"Sim", "sim", "Não", "não", "/start"};
-    private Hermes postman;
+    private Hermes hermes;
+    private String text;
+    private String name;
+    private long chat_id;
 
-    public void setHermes(Hermes postman){
-        this.postman = postman;
+    public void connect(Hermes hermes){
+        this.hermes = hermes;
     }
 
     public void onUpdateReceived(Update update) {
-        String text = update.getMessage().getText();
-        String nome = update.getMessage().getFrom().getFirstName();
+        this.text = update.getMessage().getText();
+        this.name = update.getMessage().getFrom().getFirstName();
+        this.chat_id = update.getMessage().getChatId();
 
-        long chat_id = update.getMessage().getChatId();
-        postman.takeOut(text);
+        hermes.takeOut(text);
 
 //        if(!inDict(text))
 //            sendText(update, "Me desculpe, mas não pude te compreender");
@@ -78,10 +77,10 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         return false;
     }
 
-    public void sendText(Update update, String text){
+    public void sendText(String text){
         SendMessage message = new SendMessage();
         message.setText(text+"\n");
-        message.setChatId(update.getMessage().getChatId());
+        message.setChatId(chat_id);
         try {
             execute(message);
         } catch (TelegramApiException e) {
