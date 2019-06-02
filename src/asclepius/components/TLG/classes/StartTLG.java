@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.generics.BotSession;
 public class StartTLG implements IStartTLG {
     private TLG telegram;
 
-    public void start(){
+    public ITLG start(){
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
         try {
@@ -20,14 +20,7 @@ public class StartTLG implements IStartTLG {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-    }
-
-    public ITLG getConnectionObject(){
         return telegram;
-    }
-
-    public void connect(Hermes messenger){
-        telegram.setHermes(messenger);
     }
 
 }

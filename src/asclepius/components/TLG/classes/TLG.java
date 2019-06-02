@@ -18,10 +18,10 @@ import java.util.Scanner;
 public class TLG extends TelegramLongPollingBot implements ITLG{
 
     private String[] dict = {"Sim", "sim", "Não", "não", "/start"};
-    private Hermes messenger;
+    private Hermes postman;
 
-    public void setHermes(Hermes messenger){
-        this.messenger = messenger;
+    public void setHermes(Hermes postman){
+        this.postman = postman;
     }
 
     public void onUpdateReceived(Update update) {
@@ -29,43 +29,44 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         String nome = update.getMessage().getFrom().getFirstName();
 
         long chat_id = update.getMessage().getChatId();
+        postman.takeOut(text);
 
-        if(!inDict(text))
-            sendText(update, "Me desculpe, mas não pude te compreender");
+//        if(!inDict(text))
+//            sendText(update, "Me desculpe, mas não pude te compreender");
 
-        else if(text.equals("/start")){
-            SendMessage message = new SendMessage() // Create a message object object
-                    .setChatId(chat_id)
-                    .setText("Vamos iniciar a consulta "+nome+"?" );
-            // Create ReplyKeyboardMarkup object
-            ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-            // Create the keyboard (list of keyboard rows)
-            List<KeyboardRow> keyboard = new ArrayList<>();
-            // Create a keyboard row
-            KeyboardRow row = new KeyboardRow();
-            // Set each button, you can also use KeyboardButton objects if you need something else than text
-            row.add("Sim");
-            // Add the first row to the keyboard
-            keyboard.add(row);
-            // Create another keyboard row
-            row = new KeyboardRow();
-            // Set each button for the second line
-            row.add("Não");
-            // Add the second row to the keyboard
-            keyboard.add(row);
-            // Set the keyboard to the markup
-            keyboardMarkup.setKeyboard(keyboard);
-            // Add it to the message
-            message.setReplyMarkup(keyboardMarkup);
-            try {
-                execute(message);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            messenger.takeOut(text);
-        }
+        //else if(text.equals("/start")){
+//            SendMessage message = new SendMessage() // Create a message object object
+//                    .setChatId(chat_id)
+//                    .setText("Vamos iniciar a consulta "+nome+"?" );
+//            // Create ReplyKeyboardMarkup object
+//            ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+//            // Create the keyboard (list of keyboard rows)
+//            List<KeyboardRow> keyboard = new ArrayList<>();
+//            // Create a keyboard row
+//            KeyboardRow row = new KeyboardRow();
+//            // Set each button, you can also use KeyboardButton objects if you need something else than text
+//            row.add("Sim");
+//            // Add the first row to the keyboard
+//            keyboard.add(row);
+//            // Create another keyboard row
+//            row = new KeyboardRow();
+//            // Set each button for the second line
+//            row.add("Não");
+//            // Add the second row to the keyboard
+//            keyboard.add(row);
+//            // Set the keyboard to the markup
+//            keyboardMarkup.setKeyboard(keyboard);
+//            // Add it to the message
+//            message.setReplyMarkup(keyboardMarkup);
+//            try {
+//                execute(message);
+//            } catch (TelegramApiException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        else{
+//            postman.takeOut(text);
+//        }
 
         //System.out.println(her.sendOut());
     }
@@ -87,6 +88,7 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
             e.printStackTrace();
         }
     }
+
 
     public String getBotUsername() {
         return null;

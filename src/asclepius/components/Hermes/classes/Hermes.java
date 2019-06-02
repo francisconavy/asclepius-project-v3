@@ -24,6 +24,9 @@ public class Hermes implements IHermes {
 
     public void takeOut(String text){
         fromOut = text;
+        if(text.equalsIgnoreCase("/start")){
+            patient.isReady();
+        }
     }
 
     public void takeIn(String text){

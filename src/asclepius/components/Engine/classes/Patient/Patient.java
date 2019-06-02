@@ -23,6 +23,10 @@ public class Patient implements IPatient {
         System.out.println("Patient's disease: " + patientInstance[attributes.length - 1]);
     }
 
+    public void isReady(){
+        System.out.println("Minha mãe disse que posso começar a consulta");
+    }
+
     public String ask(String question) {
         String result = "unknown";
 

@@ -1,4 +1,4 @@
-
+package asclepius;
 
 import asclepius.components.Engine.classes.DSC.DataSetComponent;
 import asclepius.components.Engine.classes.Doctor.Doctor;
@@ -9,28 +9,29 @@ import asclepius.components.Engine.interfaces.Patient.IPatient;
 import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.Hermes.interfaces.IHermes;
+import asclepius.components.TLG.interfaces.ITLG;
 
 public class MainClass{
 
 
     public static void main(String[] args) {
 
-        Hermes messenger = new Hermes();
+        Hermes postman = new Hermes();
 
         //Iniciando a interface do telegram
-        StartTLG telegrambot = new StartTLG();
+        StartTLG telegramStarter = new StartTLG();
 
-        telegrambot.start();
+        ITLG telegrambot = telegramStarter.start();
 
         //conecta telegram ao hermes
-        telegrambot.connect(messenger);
+        telegrambot.setHermes(postman);
 
 
         //talvez seja melhor criar um método start na classe TLG do que criar uma classe startTLG, pq se não teremos que
         //dar request toda hora de coisas do verdadeiro objeto TLG por meio da StartTLG. Esse abaixo é só um caso, mas acho que
         //varias outras coisas que a gente for fazer vão precisar disso
         //conecta hermes ao telegram
-        messenger.connect(telegrambot.getConnectionObject());
+        postman.connect(telegrambot);
 
 
 
@@ -43,7 +44,7 @@ public class MainClass{
         IPatient aPatient = new Patient();
 
         //conecta hermes ao paciente;
-        messenger.connect(aPatient);
+        postman.connect(aPatient);
 
         // conectando-o no componente DataSet
         aPatient.connect(dataset);
