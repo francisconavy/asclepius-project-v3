@@ -18,11 +18,10 @@ import java.util.Scanner;
 public class TLG extends TelegramLongPollingBot implements ITLG{
 
     private String[] dict = {"Sim", "sim", "Não", "não", "/start"};
-    private Hermes her;
+    private Hermes messenger;
 
-    public TLG(Hermes her){
-        super();
-        this.her = her;
+    public void setHermes(Hermes messenger){
+        this.messenger = messenger;
     }
 
     public void onUpdateReceived(Update update) {
@@ -65,7 +64,7 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
             }
         }
         else{
-            her.takeOut(text);
+            messenger.takeOut(text);
         }
 
         //System.out.println(her.sendOut());
@@ -87,7 +86,6 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-        return;
     }
 
     public String getBotUsername() {

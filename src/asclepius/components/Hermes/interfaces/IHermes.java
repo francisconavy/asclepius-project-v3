@@ -1,8 +1,9 @@
 package asclepius.components.Hermes.interfaces;
 
 public interface IHermes {
-    public void takeOut(String text);
-    public void takeIn(String text);
-    public String sendOut();
-    public String sendIn();
+    //acho que não precisamos colocar os connects do telegram na interface do hermes, já que o hermes não é especifico do telegram
+    void takeOut(String text);
+    void takeIn(String text);
+    String sendOut();
+    String sendIn();
 }
