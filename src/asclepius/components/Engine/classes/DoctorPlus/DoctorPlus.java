@@ -2,6 +2,7 @@ package asclepius.components.Engine.classes.DoctorPlus;
 
 import asclepius.components.Engine.classes.TBC.DataTree;
 import asclepius.components.Engine.classes.TBC.DiagMatrix;
+import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.DoctorPlus.IDoctorPlus;
 import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 import asclepius.components.Engine.interfaces.TBC.ITree;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 public class DoctorPlus implements IDoctorPlus {
     private IPatientPlus curPatient;
     private String answer = "";
-    public static final String defaultSource = "resources\\data\\test-cases-minus.csv";
     
     public DoctorPlus(IPatientPlus targetPatient) {
         this.connect(targetPatient);
@@ -26,7 +26,7 @@ public class DoctorPlus implements IDoctorPlus {
     	//Verifica ser foi efetuada a conexão
         if(curPatient != null){
             //Se a conexão foi efetuada com sucesso...
-            ITree ivTree = DataTree.generate(defaultSource);
+            ITree ivTree = DataTree.generate(SetConstants.getDefaultSource());
             ArrayList<ArrayList<String>> diag = ivTree.diagCheck();
             System.out.println(diag); //Remover depois
             
@@ -36,14 +36,14 @@ public class DoctorPlus implements IDoctorPlus {
             
             for(int x = 0; x < ivTree.requestAttributes().length - 1; x++){
                 //Cortando metade do array "diag" (seguindo um dos dois caminhos do nó da árvore)
-                if(curPatient.ask(ivTree.requestAttributes()[x]).equalsIgnoreCase("t")){
+                if(curPatient.ask(ivTree.requestAttributes()[x]).equalsIgnoreCase(SetConstants.getTrue())){
                     diagStartSize = diag.size();
                     
                     for(int y = 0; y < diagStartSize/2; y++){
                         diag.remove(0);
                     }
                     
-                }else if(curPatient.ask(ivTree.requestAttributes()[x]).equalsIgnoreCase("f")){
+                }else if(curPatient.ask(ivTree.requestAttributes()[x]).equalsIgnoreCase(SetConstants.getFalse())){
                     diagStartSize = diag.size();
                     
                     for(int y = 0; y < diagStartSize/2; y++){

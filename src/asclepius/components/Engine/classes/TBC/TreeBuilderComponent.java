@@ -1,5 +1,6 @@
 package asclepius.components.Engine.classes.TBC;
 
+import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.TBC.ITree;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,7 +14,7 @@ public class TreeBuilderComponent implements ITree {
     private TreeNode insTree = null;
     private String[] attributes = null;
     private String[][] instances = null;
-    
+
     public TreeBuilderComponent(String dataSource){ //"dataSource" é o caminho para o arquivo CSV que gerará a árvore.
         setDataSource(dataSource);
         this.insTree = buildTree();
@@ -37,19 +38,19 @@ public class TreeBuilderComponent implements ITree {
             TreeNode curNode = headNode;
             for(int y = 0; y < instances[x].length - 1; y++){
                 if(y == ((instances[x].length - 1) - 1)){ //O segundo "-1" é por que o último andar da árvore são são os arrays de diagnósticos.
-                    if(instances[x][y].equalsIgnoreCase("f")){
+                    if(instances[x][y].equalsIgnoreCase(SetConstants.getFalse())){
                         if(curNode.getListL().contains(instances[x][instances[x].length - 1]) == false) { //Para evitar diagnósticos duplicados...
                             curNode.addToListL(instances[x][instances[x].length - 1]);
                         }
-                    }else if(instances[x][y].equalsIgnoreCase("t")){
+                    }else if(instances[x][y].equalsIgnoreCase(SetConstants.getTrue())){
                         if(curNode.getListR().contains(instances[x][instances[x].length - 1]) == false) { //Para evitar diagnósticos duplicados...
                             curNode.addToListR(instances[x][instances[x].length - 1]);
                         }
                     }
                 }else{
-                    if(instances[x][y].equalsIgnoreCase("f")){
+                    if(instances[x][y].equalsIgnoreCase(SetConstants.getFalse())){
                         curNode = curNode.getL();
-                    }else if(instances[x][y].equalsIgnoreCase("t")){
+                    }else if(instances[x][y].equalsIgnoreCase(SetConstants.getTrue())){
                         curNode = curNode.getR();
                     }else{
                         System.out.println("ERROR: the buildTree() method has crashed.");
