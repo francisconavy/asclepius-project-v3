@@ -4,5 +4,4 @@ public interface IEnquirer {
     void startInterview();
     void getDiagnosis();
     void getDiagnosis(String answer);
-
 }

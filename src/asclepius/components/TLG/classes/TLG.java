@@ -26,7 +26,7 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         this.name = update.getMessage().getFrom().getFirstName();
         this.chat_id = update.getMessage().getChatId();
 
-        System.out.println("Mensagem TELEGRAM: "+text);
+        System.out.println("@TELEGRAM: "+text);
         hermes.takeOut(text);
 
 //        if(!inDict(text))
@@ -86,7 +86,7 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
     }
 
     public String getBotToken() {
-        File file = new File("resources/token.txt");
+        File file = new File("resources\\token.txt");
         Scanner sc = null;
         try {
             sc = new Scanner(file);

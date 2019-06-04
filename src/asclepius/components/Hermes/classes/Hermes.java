@@ -1,6 +1,7 @@
 package asclepius.components.Hermes.classes;
 
 import asclepius.components.Engine.classes.Patient.Patient;
+import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Engine.interfaces.Patient.IPatient;
 import asclepius.components.Hermes.interfaces.IHermes;
@@ -43,10 +44,10 @@ public class Hermes implements IHermes {
             patient.isReady();
         }
         else if(text.equalsIgnoreCase("Sim")){
-            patient.symAnswer("t");
+            patient.symAnswer(SetConstants.getTrue());
         }
         else if(text.equalsIgnoreCase("Não") || text.equalsIgnoreCase("Nao")){
-            patient.symAnswer("f");
+            patient.symAnswer(SetConstants.getFalse());
         }
 
     }
@@ -54,7 +55,7 @@ public class Hermes implements IHermes {
     public void takeIn(String text){
         fromIn = text;
         if(inDict(patient.getDoc().getIvTree().requestAttributes(), text)){
-            messenger.sendText("Você tem "+text+"?");
+            messenger.sendText("Você está com "+text+"?");
         }
         else if(text.equalsIgnoreCase("Diagnostico Final")){
             ArrayList<String> result = patient.getDoc().getResult();
@@ -68,7 +69,7 @@ public class Hermes implements IHermes {
                     System.out.println("Disease guess: " + result.get(i) );
                 }*/
 
-                String msg = "Diagnóstico concluído:\nVocê tem ";
+                String msg = "Diagnóstico concluído:\nVocê está com ";
                 for(int i = 0; i < result.size(); i++){
                     msg = msg + result.get(i);
 
