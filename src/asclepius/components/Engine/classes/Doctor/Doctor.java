@@ -49,27 +49,7 @@ public class Doctor implements IDoctor {
     }
 
     public void getDiagnosis(){
-
-        //String attributes[] = producer.requestAttributes();
         responder.ask(attributes[responder.getActualSym()]);
-//        String resp;
-//        String attributes[] = producer.requestAttributes();
-//        String instances[][] = producer.requestInstances();
-//        answer = new String[attributes.length - 1];
-//        diagnostic = new String[attributes.length - 1];
-
-//        for (int a = 0; a < attributes.length - 1; a++){
-//            responder.ask(attributes[a]);
-//            answer[a] = "t";
-//            System.out.println("Question: " + attributes[a] + " - " + answer[a]);
-//        }
-
-//        this.verifyDiagnostic();
-//        for(int i = 0; diagnostic[i] != null; i++){
-//            System.out.println("Disease guess: " + diagnostic[i] );
-//            boolean result = responder.finalAnswer(diagnostic[i] );
-//            System.out.println("Result: " + ((result) ? "I am right =)" : "I am wrong =("));
-//        }
     }
 
     public void getDiagnosis(String answer){

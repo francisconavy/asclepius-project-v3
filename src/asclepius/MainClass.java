@@ -10,11 +10,17 @@ import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.Hermes.interfaces.IHermes;
 import asclepius.components.TLG.interfaces.ITLG;
+import asclepius.components.Engine.classes.DoctorPlus.DoctorPlus;
+import asclepius.components.Engine.classes.PatientPlus.PatientPlus;
+import asclepius.components.Engine.classes.TBC.DiagMatrix;
+import asclepius.components.Engine.interfaces.DoctorPlus.IDoctorPlus;
+import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 
 public class MainClass{
 
 
     public static void main(String[] args) {
+<<<<<<< HEAD
 
         //Iniciando a interface do telegram
         StartTLG telegramStarter = new StartTLG();
@@ -56,13 +62,8 @@ public class MainClass{
         //conectando o paciente ao doutor
         aPatient.connect(cDoctor);
 
-        // executando a entrevista
-        //cDoctor.startInterview();
-
-        //testes de funções, depois poderiamos criar uma pasta examples ou testes pra colocar funções de teste pra gente executar
-        /*while(true){
-            System.out.println(messenger.sendOut());
-        }*/
-
+        IPatientPlus P1 = new PatientPlus();
+        IDoctorPlus D1 = new DoctorPlus(P1);
+        D1.startInterview();
     }
 }

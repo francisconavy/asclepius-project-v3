@@ -1,0 +1,9 @@
+sin1,sin2,sin3,sin4,diagnostic
+t,f,t,t,diag1
+t,t,f,f,diag1
+f,t,f,f,diag3
+t,t,t,t,diag2
+t,f,f,t,diag2
+f,f,t,t,diag1
+f,f,f,t,diag2
+f,t,t,t,diag3
