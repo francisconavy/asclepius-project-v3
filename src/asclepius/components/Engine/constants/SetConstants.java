@@ -4,7 +4,7 @@ public class SetConstants {
     private static final String sim = "t";
     private static final String nao = "f";
     private static final String naoSei = "unknown";
-    private static final String defaultSource = "resources/data/test-cases-500.csv";
+    private static final String defaultSource = "resources/data/zombie-health-spreadsheet-ml-training.csv";
 
     public static String getTrue(){
         return sim;

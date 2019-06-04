@@ -1,8 +1,12 @@
 package asclepius;
 
+import asclepius.components.Engine.classes.ADoctor.ADoctor;
+import asclepius.components.Engine.classes.APatient.APatient;
 import asclepius.components.Engine.classes.DSC.DataSetComponent;
 import asclepius.components.Engine.classes.Doctor.Doctor;
 import asclepius.components.Engine.classes.Patient.Patient;
+import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
+import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Engine.interfaces.DSC.IDataSet;
 import asclepius.components.Engine.interfaces.Doctor.IDoctor;
 import asclepius.components.Engine.interfaces.Patient.IPatient;
@@ -36,22 +40,22 @@ public class MainClass{
         dataset.setDataSource("resources/data/zombie-health-spreadsheet-ml-training.csv");
 
         // instanciando o componente paciente
-        IPatient aPatient = new Patient();
+        IAPatient aPatient = new APatient();
 
         //conecta hermes ao paciente;
         hermes.connect(aPatient);
 
         // conectando-o no componente DataSet
-        aPatient.connect(dataset);
+        //aPatient.connect(dataset);
 
         //conecta o paciente ao hermes
         aPatient.connect(hermes);
 
         // instanciando o componente doutor louco
-        IDoctor cDoctor = new Doctor();
+        IADoctor cDoctor = new ADoctor();
 
         // conectando-o ao componente DataSet
-        cDoctor.connect(dataset);
+        //cDoctor.connect(dataset);
 
         // conectando-o ao componente paciente
         cDoctor.connect(aPatient);
