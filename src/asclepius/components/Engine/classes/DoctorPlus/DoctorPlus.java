@@ -26,6 +26,8 @@ public class DoctorPlus implements IDoctorPlus {
     	//Verifica ser foi efetuada a conexão
         if(curPatient != null){
             //Se a conexão foi efetuada com sucesso...
+
+            //DEV-A
             ITree ivTree = DataTree.generate(SetConstants.getDefaultSource());
             ArrayList<ArrayList<String>> diag = ivTree.diagCheck();
             System.out.println(diag); //Remover depois
@@ -33,10 +35,11 @@ public class DoctorPlus implements IDoctorPlus {
             int diagStartSize;
             int firstArraySet = 0, stoppingCondition = 0, nonVoidFound = 0; ArrayList<String> curArray = null; //Usado na condição código 1
             ArrayList<String> result = null;
-            
+            //Fim do DEV-A
+
             for(int x = 0; x < ivTree.requestAttributes().length - 1; x++){
                 //Cortando metade do array "diag" (seguindo um dos dois caminhos do nó da árvore)
-                if(curPatient.ask(ivTree.requestAttributes()[x]).equalsIgnoreCase(SetConstants.getTrue())){
+                if(curPatient.ask(ivTree.requestAttributes()[x]).equalsIgnoreCase(SetConstants.getTrue())){ //LINK START - Mandar a X# pergunta
                     diagStartSize = diag.size();
                     
                     for(int y = 0; y < diagStartSize/2; y++){
@@ -64,8 +67,9 @@ public class DoctorPlus implements IDoctorPlus {
                             break;
                         }
                     }
-                    break;
+                    break; //Deve ser trocado pelo retorno.
                 }else if(DiagMatrix.verify(diag) == 1){ //Se há 2 ou mais arrays não-vazios...
+                    //DEV-B
                     System.out.println("Condição 1 acionada."); //Remover depois...
                     for(int b = 0; b < diag.size(); b++) {
                         if(diag.get(b).isEmpty() == false) {
@@ -84,18 +88,19 @@ public class DoctorPlus implements IDoctorPlus {
                             }
                         }
                     }
-                    if(nonVoidFound - 1 == stoppingCondition){ //Se a condição de parada foi atingida...
+                    if(nonVoidFound - 1 == stoppingCondition){ //Se a condição de parada foi atingida... //DEV-C
                         result = curArray;
                         firstArraySet = 0;
                         stoppingCondition = 0;
                         nonVoidFound = 0;
                         System.out.println("Condição 1 quebrou o ciclo...!");
                         break;
-                    }else{
+                    }else { //Se a condição de parada não foi atingida... Vá para a próxima pergunta.
                         firstArraySet = 0;
                         stoppingCondition = 0;
                         nonVoidFound = 0;
                     }
+                    //DEV-D /|\ Mandar para o paciente a próxima pergunta
 
                 }else if(DiagMatrix.verify(diag) == 2){ //Se todos os arrays são vazios...
                     System.out.println("Condição 2 acionada."); //Remover depois...
@@ -111,7 +116,7 @@ public class DoctorPlus implements IDoctorPlus {
                 System.out.println("%: " + diag);
             }
 
-            System.out.println("O DIAGNÓSTICO FINAL É: " + result); //Trocar essa apresentação do diagnóstico depois
+            System.out.println("O DIAGNÓSTICO FINAL É: " + result); //Trocar essa apresentação do diagnóstico depois - remover depois do APOCALYPSE MERGE
             
         }else{
             //Se a conexão não foi efeutada com sucesso...
