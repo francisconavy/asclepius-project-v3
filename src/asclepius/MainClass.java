@@ -17,10 +17,7 @@ import asclepius.components.Engine.interfaces.DoctorPlus.IDoctorPlus;
 import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 
 public class MainClass{
-
-
     public static void main(String[] args) {
-<<<<<<< HEAD
 
         //Iniciando a interface do telegram
         StartTLG telegramStarter = new StartTLG();
@@ -36,7 +33,7 @@ public class MainClass{
 
         // instanciando o componente DataSet
         IDataSet dataset = new DataSetComponent();
-        dataset.setDataSource("resources/zombie-health-spreadsheet-ml-training.csv");
+        dataset.setDataSource("resources/data/zombie-health-spreadsheet-ml-training.csv");
 
         // instanciando o componente paciente
         IPatient aPatient = new Patient();
@@ -61,9 +58,9 @@ public class MainClass{
 
         //conectando o paciente ao doutor
         aPatient.connect(cDoctor);
-
-        IPatientPlus P1 = new PatientPlus();
-        IDoctorPlus D1 = new DoctorPlus(P1);
-        D1.startInterview();
+//
+//        IPatientPlus P1 = new PatientPlus();
+//        IDoctorPlus D1 = new DoctorPlus(P1);
+//        D1.startInterview();
     }
 }

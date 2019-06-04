@@ -1,10 +1,10 @@
 package asclepius.components.Engine.constants;
 
 public class SetConstants {
-    private static final String sim = "1";
-    private static final String nao = "0";
+    private static final String sim = "t";
+    private static final String nao = "f";
     private static final String naoSei = "unknown";
-    private static final String defaultSource = "resources\\data\\test-cases-500.csv";
+    private static final String defaultSource = "resources/data/test-cases-500.csv";
 
     public static String getTrue(){
         return sim;
