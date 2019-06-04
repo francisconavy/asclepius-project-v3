@@ -81,7 +81,10 @@ public class Doctor implements IDoctor {
         else{
             //hora de dar o diagnostico
             diagnostic = new String[attributes.length - 1];
-            this.verifyDiagnostic(responder.getPatInst());
+            this.verifyDiagnostic(responder.getPatInst()); //simula o result da dev
+
+
+            //T-A
             for(int i = 0; diagnostic[i] != null; i++){
                 responder.tellDisease(diagnostic[i]);
                 System.out.println("Disease guess: " + diagnostic[i] );
