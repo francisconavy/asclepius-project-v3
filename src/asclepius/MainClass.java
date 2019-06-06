@@ -3,22 +3,12 @@ package asclepius;
 import asclepius.components.Engine.classes.ADoctor.ADoctor;
 import asclepius.components.Engine.classes.APatient.APatient;
 import asclepius.components.Engine.classes.DSC.DataSetComponent;
-import asclepius.components.Engine.classes.Doctor.Doctor;
-import asclepius.components.Engine.classes.Patient.Patient;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Engine.interfaces.DSC.IDataSet;
-import asclepius.components.Engine.interfaces.Doctor.IDoctor;
-import asclepius.components.Engine.interfaces.Patient.IPatient;
-import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.Hermes.classes.Hermes;
-import asclepius.components.Hermes.interfaces.IHermes;
+import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.TLG.interfaces.ITLG;
-import asclepius.components.Engine.classes.DoctorPlus.DoctorPlus;
-import asclepius.components.Engine.classes.PatientPlus.PatientPlus;
-import asclepius.components.Engine.classes.TBC.DiagMatrix;
-import asclepius.components.Engine.interfaces.DoctorPlus.IDoctorPlus;
-import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 
 public class MainClass{
     public static void main(String[] args) {
@@ -62,9 +52,5 @@ public class MainClass{
 
         //conectando o paciente ao doutor
         aPatient.connect(cDoctor);
-//
-//        IPatientPlus P1 = new PatientPlus();
-//        IDoctorPlus D1 = new DoctorPlus(P1);
-//        D1.startInterview();
     }
 }

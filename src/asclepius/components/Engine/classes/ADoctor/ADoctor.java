@@ -1,12 +1,10 @@
 package asclepius.components.Engine.classes.ADoctor;
 
-import asclepius.components.Engine.classes.APatient.APatient;
 import asclepius.components.Engine.classes.TBC.DataTree;
 import asclepius.components.Engine.classes.TBC.DiagMatrix;
 import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
-import asclepius.components.Engine.interfaces.PatientPlus.IPatientPlus;
 import asclepius.components.Engine.interfaces.TBC.ITree;
 import asclepius.components.Engine.interfaces.all.IResponder;
 import asclepius.components.Engine.interfaces.all.ITableProducer;
@@ -26,7 +24,7 @@ public class ADoctor implements IADoctor {
 
     private int diagStartSize;
     private int firstArraySet = 0, stoppingCondition = 0, nonVoidFound = 0; ArrayList<String> curArray = null; //Usado na condição código 1
-    private ArrayList<String> result = null;
+    private ArrayList<String> result = new ArrayList<>();
 
     public ITree getIvTree(){
         return ivTree;
@@ -42,7 +40,7 @@ public class ADoctor implements IADoctor {
     }
 
     public void endInterview(){
-        curPatient.tellDisease("Diagnostico Final");
+        curPatient.tellDisease();
 //        for(int i = 0; i < result.size(); i++){
 //            curPatient.tellDisease(result.get(i));
 //            System.out.println("Disease guess: " + result.get(i) );
@@ -54,6 +52,7 @@ public class ADoctor implements IADoctor {
     }
 
     public void getDiagnosis(){
+        curPatient.ask("Irei te fazer algumas perguntas, e preciso que responda com SIM ou NÃO");
         curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
     }
 
@@ -128,6 +127,7 @@ public class ADoctor implements IADoctor {
             System.out.println("Condição 2 acionada."); //Remover depois...
             System.out.println("All arrays are void... Insert databuild engine here.");
             result.add("Doença não identificada");
+            endInterview();
         }else{
             System.out.println("Condição 3 acionada - ERRO."); //Remover depois...
             System.out.println("ERROR: Something went wrong during DiagMatrix's verify(); - bad list.");

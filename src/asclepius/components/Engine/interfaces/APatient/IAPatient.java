@@ -5,17 +5,17 @@ import asclepius.components.Hermes.interfaces.IHermes;
 
 public interface IAPatient {
     void ask(String question);
-    void tellDisease(String disease);
+    void tellDisease();
     int getCurSym();
 
     void connect(IADoctor doctor);
     IADoctor getDoc();
     void connect(IHermes hermes);
 
-    void hi();
+    void hi(String nome, long chatID);
     void isReady();
     void symAnswer(String answer);
 
 
-
+    void understand(String text);
 }

@@ -26,11 +26,9 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         this.name = update.getMessage().getFrom().getFirstName();
         this.chat_id = update.getMessage().getChatId();
 
-        System.out.println("@TELEGRAM: "+text);
+        //System.out.println("@TELEGRAM: "+text);
         hermes.takeOut(text);
 
-//        if(!inDict(text))
-//            sendText(update, "Me desculpe, mas não pude te compreender");
 
         //else if(text.equals("/start")){
 //            SendMessage message = new SendMessage() // Create a message object object
@@ -80,13 +78,21 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         }
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public long getChatID(){
+        return chat_id;
+    }
+
 
     public String getBotUsername() {
         return null;
     }
 
     public String getBotToken() {
-        File file = new File("resources\\token.txt");
+        File file = new File("resources/token.txt");
         Scanner sc = null;
         try {
             sc = new Scanner(file);
