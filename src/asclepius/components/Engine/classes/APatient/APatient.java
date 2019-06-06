@@ -24,6 +24,10 @@ public class APatient implements IAPatient {
         return doctor;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public void connect(IHermes hermes){
         this.hermes = hermes;
     }
@@ -46,7 +50,7 @@ public class APatient implements IAPatient {
 
     @Override
     public void ask(String question) {
-        if(question.equalsIgnoreCase("Vamos iniciar a consulta?")){
+        if(question.contains("iniciar a consulta")){
             hermes.takeIn(question);
         }
         else if(question.contains("perguntas")){

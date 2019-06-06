@@ -36,7 +36,7 @@ public class ADoctor implements IADoctor {
     }
 
     public void startInterview(){
-        curPatient.ask("Vamos iniciar a consulta?");
+        curPatient.ask("Olá "+curPatient.getName()+"!\nVamos iniciar a consulta?");
     }
 
     public void endInterview(){
