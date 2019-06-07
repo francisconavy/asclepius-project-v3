@@ -3,6 +3,9 @@ package asclepius.components.TLG.interfaces;
 import asclepius.components.Hermes.classes.Hermes;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public interface ITLG {
 
     void connect(Hermes hermes);
@@ -10,5 +13,8 @@ public interface ITLG {
     String getName();
     long getChatID();
 
-    void sendText(String text);
+    void sendText(String text, long chatID);
+    void sendText(String text, String[][] teclado, long chatID);
+
+
 }

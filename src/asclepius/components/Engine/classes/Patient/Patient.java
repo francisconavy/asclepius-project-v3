@@ -68,11 +68,11 @@ public class Patient implements IPatient {
     }
 
     public void ask(String question) {
-        hermes.takeIn(question);
+        //hermes.takeIn(question);
     }
 
     public void tellDisease(String disease){
-        hermes.takeIn(disease);
+        //hermes.takeIn(disease);
     }
 
     public boolean finalAnswer(String answer) {

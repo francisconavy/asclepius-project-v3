@@ -1,4 +1,6 @@
 .idea/
-
+classes/
+src/META-INF
 resources/token.txt
 target/classes/token.txt
+

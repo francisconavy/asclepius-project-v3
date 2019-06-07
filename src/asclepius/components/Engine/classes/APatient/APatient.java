@@ -6,8 +6,10 @@ import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Hermes.interfaces.IHermes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class APatient implements IAPatient {
+
     private int curSym = 0;
     private String name;
     private long chatID;
@@ -27,6 +29,8 @@ public class APatient implements IAPatient {
     public String getName(){
         return name;
     }
+
+    public long getChatID(){ return chatID; }
 
     public void connect(IHermes hermes){
         this.hermes = hermes;
@@ -51,13 +55,16 @@ public class APatient implements IAPatient {
     @Override
     public void ask(String question) {
         if(question.contains("iniciar a consulta")){
-            hermes.takeIn(question);
+            String[][] teclado = {{"Vamos"},
+                                    {"Agora não"}};
+            hermes.takeIn(question, teclado, chatID);
         }
         else if(question.contains("perguntas")){
-            hermes.takeIn(question);
+            String[][] teclado = {{"sim", "não"}};
+            hermes.takeIn(question, teclado, chatID);
         }
         else{
-            hermes.takeIn("Você está com "+question+"?");
+            hermes.takeIn("Você está com "+question+"?", chatID);
         }
     }
 
@@ -80,7 +87,8 @@ public class APatient implements IAPatient {
                 msg = msg + ".";
             }
         }
-        hermes.takeIn(msg);
+        String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
+        hermes.takeIn(msg, teclado, chatID);
     }
 
     public void understand(String text){
@@ -100,4 +108,5 @@ public class APatient implements IAPatient {
     public int getCurSym() {
         return this.curSym;
     }
+
 }

@@ -10,6 +10,7 @@ import asclepius.components.Engine.interfaces.all.IResponder;
 import asclepius.components.Engine.interfaces.all.ITableProducer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ADoctor implements IADoctor {
     private IAPatient curPatient;

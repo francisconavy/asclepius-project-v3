@@ -20,4 +20,6 @@ public interface IAPatient {
     void understand(String text);
 
     String getName();
+    long getChatID();
+
 }

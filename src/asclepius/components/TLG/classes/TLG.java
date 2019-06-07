@@ -5,10 +5,14 @@ import asclepius.components.TLG.interfaces.ITLG;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TLG extends TelegramLongPollingBot implements ITLG{
@@ -25,57 +29,44 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         this.text = update.getMessage().getText();
         this.name = update.getMessage().getFrom().getFirstName();
         this.chat_id = update.getMessage().getChatId();
-
         //System.out.println("@TELEGRAM: "+text);
-        hermes.takeOut(text);
-
-
-        //else if(text.equals("/start")){
-//            SendMessage message = new SendMessage() // Create a message object object
-//                    .setChatId(chat_id)
-//                    .setText("Vamos iniciar a consulta "+nome+"?" );
-//            // Create ReplyKeyboardMarkup object
-//            ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-//            // Create the keyboard (list of keyboard rows)
-//            List<KeyboardRow> keyboard = new ArrayList<>();
-//            // Create a keyboard row
-//            KeyboardRow row = new KeyboardRow();
-//            // Set each button, you can also use KeyboardButton objects if you need something else than text
-//            row.add("Sim");
-//            // Add the first row to the keyboard
-//            keyboard.add(row);
-//            // Create another keyboard row
-//            row = new KeyboardRow();
-//            // Set each button for the second line
-//            row.add("Não");
-//            // Add the second row to the keyboard
-//            keyboard.add(row);
-//            // Set the keyboard to the markup
-//            keyboardMarkup.setKeyboard(keyboard);
-//            // Add it to the message
-//            message.setReplyMarkup(keyboardMarkup);
-//            try {
-//                execute(message);
-//            } catch (TelegramApiException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        else{
-//            postman.takeOut(text);
-//        }
-
-        //System.out.println(her.sendOut());
+        hermes.takeOut(text, chat_id);
     }
 
-    public void sendText(String text){
-        SendMessage message = new SendMessage();
-        message.setText(text+"\n");
-        message.setChatId(chat_id);
+    public void sendText(String text, String[][] teclado, long chatID){
+        SendMessage message = new SendMessage() // Create a message object object
+            .setChatId(chatID)
+            .setText(text+"\n");
+        message.setReplyMarkup(keyboardFactory(teclado));
         try {
             execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendText(String text, long chatID){
+        SendMessage message = new SendMessage();
+        message.setText(text+"\n");
+        message.setChatId(chatID);
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ReplyKeyboardMarkup keyboardFactory(String[][] teclado){
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        for(int i = 0; i < teclado.length; i++){
+            KeyboardRow row = new KeyboardRow();
+            for(int j = 0; j < teclado[i].length; j++){
+                row.add(teclado[i][j]);
+            }
+            keyboard.add(row);
+        }
+        return keyboardMarkup.setKeyboard(keyboard);
     }
 
     public String getName(){
