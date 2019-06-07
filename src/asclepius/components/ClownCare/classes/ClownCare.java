@@ -1,4 +1,56 @@
 package asclepius.components.ClownCare.classes;
 
-public class ClownCare {
+import asclepius.components.ClownCare.interfaces.IClownCare;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class ClownCare implements IClownCare {
+    private ArrayList<String> jokes = new ArrayList<>();
+
+    public ClownCare() {
+        try {
+            FileReader arquivo = new FileReader("resources/jokes.txt");
+            BufferedReader formatado = new BufferedReader(arquivo);
+            String linha = formatado.readLine();
+            while(linha!=null){
+                jokes.add(linha);
+                linha = formatado.readLine();
+            }
+            formatado.close();
+            System.out.println("Piadas adicionadas no array com sucesso!");
+        }catch (IOException e){
+            System.out.println("Nao foi possivel abrir o arquivo 'jokes.txt'");
+        }
+    }
+    public void addJoke(String joke){
+        try {
+            FileWriter arquivo = new FileWriter("resources/jokes.txt", true);
+            PrintWriter formatado = new PrintWriter(arquivo);
+            if(!jokes.contains(joke)) {
+                formatado.println(joke);
+                jokes.add(joke);
+                System.out.println("Piada gravada no arquivo com sucesso!");
+            }
+            else
+                System.out.println("Piada ja encontrada no repertório");
+            formatado.close();
+        }catch (IOException e){
+            System.out.println("Nao foi possivel abrir o arquivo 'jokes.txt'");
+        }
+    }
+
+    public String randJoke(int percent){
+        Random gerador = new Random();
+        int aleatorio = gerador.nextInt(101);
+        //System.out.println(aleatorio);
+        if(percent > aleatorio){
+            return jokes.get(gerador.nextInt(jokes.size()));
+        }
+        else{
+            return null;
+        }
+    }
 }
