@@ -1,5 +1,6 @@
 package asclepius.components.Engine.classes.APatient;
 
+import asclepius.components.Engine.classes.ADoctor.ADoctor;
 import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
@@ -91,16 +92,35 @@ public class APatient implements IAPatient {
         hermes.takeIn(msg, teclado, chatID);
     }
 
-    public void understand(String text){
-        if(status == 1){
+    public void understand(String text) {
+        if(status == 0)
+            return;
+        if (status == 1 && text.equalsIgnoreCase("Vamos")) {
             status++;
             isReady();
         }
-        else if(text.equalsIgnoreCase("Sim")){
+        else if(status == 1 && text.equalsIgnoreCase("Agora não")){
+            String[][] teclado = {{"/start"}};
+            hermes.takeIn("Até a próxima", teclado, chatID);
+            hermes.disconnect(this);
+        }
+        else if (text.equalsIgnoreCase("Sim")) {
             symAnswer(SetConstants.getTrue());
         }
-        else if(text.equalsIgnoreCase("Não") || text.equalsIgnoreCase("Nao")){
+        else if (text.equalsIgnoreCase("Não") || text.equalsIgnoreCase("Nao")) {
             symAnswer(SetConstants.getFalse());
+        }
+        else if (text.equalsIgnoreCase("Nova consulta")) {
+            IADoctor d = new ADoctor();
+            d.connect(this);
+            this.connect(d);
+            this.hi(name, chatID);
+            status = 1;
+        }
+        else if (text.equalsIgnoreCase("Encerrar consulta")) {
+            String[][] teclado = {{"/start"}};
+            hermes.takeIn("Até a próxima", teclado, chatID);
+            hermes.disconnect(this);
         }
     }
 

@@ -26,7 +26,20 @@ public class Hermes implements IHermes {
         this.patients.add(patient);
     }
 
-    public IAPatient findPatient(long chat_id){
+    public void disconnect( IAPatient patient){
+        patients.remove(findPatientID(patient));
+    }
+
+    private int findPatientID(IAPatient patient){
+        for(int i = 0;i < patients.size(); i++){
+            if(patients.get(i) == patient){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private IAPatient findPatient(long chat_id){
         for(IAPatient p : patients){
             if(p.getChatID() == chat_id){
                 return p;
@@ -75,5 +88,7 @@ public class Hermes implements IHermes {
     public void takeIn(String text, long chat_id){
         messenger.sendText(text, chat_id);
     }
+
+
 
 }
