@@ -95,11 +95,11 @@ public class APatient implements IAPatient {
     public void understand(String text) {
         if(status == 0)
             return;
-        if (status == 1 && text.equalsIgnoreCase("Vamos")) {
+        if (text.equalsIgnoreCase("Vamos")) {
             status++;
             isReady();
         }
-        else if(status == 1 && text.equalsIgnoreCase("Agora não")){
+        else if(text.equalsIgnoreCase("Agora não")){
             String[][] teclado = {{"/start"}};
             hermes.takeIn("Até a próxima", teclado, chatID);
             hermes.disconnect(this);
@@ -115,6 +115,7 @@ public class APatient implements IAPatient {
             d.connect(this);
             this.connect(d);
             this.hi(name, chatID);
+            curSym = 0;
             status = 1;
         }
         else if (text.equalsIgnoreCase("Encerrar consulta")) {

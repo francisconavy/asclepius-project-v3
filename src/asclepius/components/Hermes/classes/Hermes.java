@@ -39,6 +39,16 @@ public class Hermes implements IHermes {
         return -1;
     }
 
+    private int findPatientID(long chat_id){
+        for(int i = 0;i < patients.size(); i++){
+            if(patients.get(i).getChatID() == chat_id){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     private IAPatient findPatient(long chat_id){
         for(IAPatient p : patients){
             if(p.getChatID() == chat_id){
@@ -56,6 +66,10 @@ public class Hermes implements IHermes {
                 pCont++;
             }
             else{
+                int aux = findPatientID(chat_id);
+                if(aux != -1){
+                    this.disconnect(patients.get(aux));
+                }
                 IAPatient p = new APatient();
                 this.connect(p);
                 p.connect(this);
