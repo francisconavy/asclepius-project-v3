@@ -1,5 +1,6 @@
 package asclepius;
 
+import asclepius.components.ClownCare.classes.ClownCare;
 import asclepius.components.Engine.classes.ADoctor.ADoctor;
 import asclepius.components.Engine.classes.APatient.APatient;
 import asclepius.components.Engine.classes.DSC.DataSetComponent;
@@ -11,7 +12,16 @@ import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.TLG.interfaces.ITLG;
 
 public class MainClass{
-    public static void main(String[] args) {
+    public static void main(String[] args){
+        ClownCare palhaco = new ClownCare();
+        for(int i=0; i<10; i++) {
+            String piada = palhaco.randJoke(10);
+            if (piada != null) {
+                System.out.println((i+1)+" - "+piada);
+            } else {
+                System.out.println((i+1)+" - "+"sem piada hoje");
+            }
+        }
 
         //Iniciando a interface do telegram
         StartTLG telegramStarter = new StartTLG();
