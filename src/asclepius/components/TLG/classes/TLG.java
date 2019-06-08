@@ -83,7 +83,7 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
     }
 
     public String getBotToken() {
-        File file = new File("resources/token.txt");
+        File file = new File("resources\\token.txt");
         Scanner sc = null;
         try {
             sc = new Scanner(file);

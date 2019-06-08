@@ -3,6 +3,8 @@ package asclepius.components.Engine.interfaces.APatient;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Hermes.interfaces.IHermes;
 
+import java.util.ArrayList;
+
 public interface IAPatient {
     void ask(String question);
     void tellDisease();
@@ -21,5 +23,7 @@ public interface IAPatient {
 
     String getName();
     long getChatID();
+
+    ArrayList<String> getSymVec();
 
 }

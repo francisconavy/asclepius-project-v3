@@ -12,6 +12,8 @@ public interface IADoctor {
     void endInterview();
     void getDiagnosis();
     void getDiagnosis(String answer);
+    void dataIncrease(int value);
+    int getDataIncreaseStatus();
 
     ArrayList<String> getResult();
 }

@@ -15,6 +15,7 @@ public class APatient implements IAPatient {
     private String name;
     private long chatID;
     private int status=0;
+    private ArrayList<String> symVec = new ArrayList<>();
 
     private IADoctor doctor;
     private IHermes hermes;
@@ -50,46 +51,64 @@ public class APatient implements IAPatient {
 
     public void symAnswer(String answer) {
         curSym++;
+        symVec.add(answer);
         doctor.getDiagnosis(answer);
     }
 
     @Override
     public void ask(String question) {
-        if(question.contains("iniciar a consulta")){
+        if (question.contains("iniciar a consulta")) {
             String[][] teclado = {{"Vamos"},
-                                    {"Agora não"}};
+                    {"Agora não"}};
             hermes.takeIn(question, teclado, chatID);
-        }
-        else if(question.contains("perguntas")){
-            String[][] teclado = {{"sim", "não"}};
+        } else if (question.contains("perguntas")) {
+            hermes.takeIn(question, chatID);
+        } else if (question.contains("dados")){
+            String[][] teclado = {{"Claro!"},
+                    {"Não, obrigado..."}};
             hermes.takeIn(question, teclado, chatID);
         }
         else{
-            hermes.takeIn("Você está com "+question+"?", chatID);
+            String[][] teclado = {{"sim", "não"}};
+            hermes.takeIn("Você está com " + question + "?", teclado, chatID);
         }
     }
 
     @Override
     public void tellDisease() {
-        String msg = "Diagnóstico concluído:\nVocê está com ";
         ArrayList<String> result = getDoc().getResult();
-        for(int i = 0; i < result.size(); i++){
-            msg = msg + result.get(i);
+        int dataIncreaseActive = doctor.getDataIncreaseStatus();
 
-            if(result.size() > 1){
-                if(i < (result.size() - 2)) {
-                    msg = msg + ", ";
-                }else if(i == (result.size() - 2)) {
-                    msg = msg + " e ";
-                }else if(i == (result.size() - 1)) {
-                    msg = msg + ".";
+        if(dataIncreaseActive == 0) {
+            if(result.contains("dataIncreaseNegated") == false) {
+                String msg = "Diagnóstico concluído:\nVocê está com ";
+                for (int i = 0; i < result.size(); i++) {
+                    msg = msg + result.get(i);
+
+                    if (result.size() > 1) {
+                        if (i < (result.size() - 2)) {
+                            msg = msg + ", ";
+                        } else if (i == (result.size() - 2)) {
+                            msg = msg + " e ";
+                        } else if (i == (result.size() - 1)) {
+                            msg = msg + ".";
+                        }
+                    } else {
+                        msg = msg + ".";
+                    }
                 }
-            }else{
-                msg = msg + ".";
+                String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
+                hermes.takeIn(msg, teclado, chatID);
+            } else {
+                String msg = "Você não quer ajudar? Certo. Tenha um bom dia e não espere por mim quando estiver morrendo!\n^^";
+                String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
+                hermes.takeIn(msg, teclado, chatID);
             }
+        }else{
+            String msg = "" + result.get(0);
+            String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
+            hermes.takeIn(msg, teclado, chatID);
         }
-        String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
-        hermes.takeIn(msg, teclado, chatID);
     }
 
     public void understand(String text) {
@@ -120,14 +139,25 @@ public class APatient implements IAPatient {
         }
         else if (text.equalsIgnoreCase("Encerrar consulta")) {
             String[][] teclado = {{"/start"}};
-            hermes.takeIn("Até a próxima", teclado, chatID);
+            hermes.takeIn("Até a próxima!", teclado, chatID);
             hermes.disconnect(this);
+        }
+        else if (text.equalsIgnoreCase("Claro!")) {
+            doctor.dataIncrease(1);
+        }
+        else if (text.equalsIgnoreCase("Não, obrigado...")) {
+            doctor.dataIncrease(0);
         }
     }
 
     @Override
     public int getCurSym() {
         return this.curSym;
+    }
+
+    @Override
+    public ArrayList<String> getSymVec(){
+        return this.symVec;
     }
 
 }

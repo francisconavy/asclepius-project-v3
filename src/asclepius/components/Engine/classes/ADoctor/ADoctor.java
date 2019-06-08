@@ -9,6 +9,9 @@ import asclepius.components.Engine.interfaces.TBC.ITree;
 import asclepius.components.Engine.interfaces.all.IResponder;
 import asclepius.components.Engine.interfaces.all.ITableProducer;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class ADoctor implements IADoctor {
     private int diagStartSize;
     private int firstArraySet = 0, stoppingCondition = 0, nonVoidFound = 0; ArrayList<String> curArray = null; //Usado na condição código 1
     private ArrayList<String> result = new ArrayList<>();
+    private int dataIncreaseActive = 0;
 
     public ITree getIvTree(){
         return ivTree;
@@ -42,10 +46,9 @@ public class ADoctor implements IADoctor {
 
     public void endInterview(){
         curPatient.tellDisease();
-//        for(int i = 0; i < result.size(); i++){
-//            curPatient.tellDisease(result.get(i));
-//            System.out.println("Disease guess: " + result.get(i) );
-//        }
+        (curPatient.getSymVec()).clear();
+        result.clear();
+        dataIncreaseActive = 0;
     }
 
     public ArrayList<String> getResult(){
@@ -53,37 +56,39 @@ public class ADoctor implements IADoctor {
     }
 
     public void getDiagnosis(){
-        curPatient.ask("Irei te fazer algumas perguntas, e preciso que responda com SIM ou NÃO");
+        curPatient.ask("Irei te fazer algumas perguntas, e preciso que responda com 'sim' ou 'não', por favor.");
         curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
     }
 
 
     public void getDiagnosis(String answer){
         //Fase de Quebra
-        if(answer.equalsIgnoreCase(SetConstants.getTrue())){ //LINK START - Mandar a X# pergunta
-            diagStartSize = diag.size();
+        if(dataIncreaseActive == 0) {
+            if (answer.equalsIgnoreCase(SetConstants.getTrue())) { //LINK START - Mandar a X# pergunta
+                diagStartSize = diag.size();
 
-            for(int y = 0; y < diagStartSize/2; y++){
-                diag.remove(0);
+                for (int y = 0; y < diagStartSize / 2; y++) {
+                    diag.remove(0);
+                }
+
+            } else if (answer.equalsIgnoreCase(SetConstants.getFalse())) {
+                diagStartSize = diag.size();
+
+                for (int y = 0; y < diagStartSize / 2; y++) {
+                    diag.remove(diagStartSize / 2);
+                }
+
+            } else {
+                //System.out.println("WARNING: 'unknown' answer from curPatient.");
+                return; //@TODO Trocar mecanismo que retorne erro
             }
-
-        }else if(answer.equalsIgnoreCase(SetConstants.getFalse())){
-            diagStartSize = diag.size();
-
-            for(int y = 0; y < diagStartSize/2; y++){
-                diag.remove(diagStartSize/2);
-            }
-
-        }else{
-            //System.out.println("WARNING: 'unknown' answer from curPatient.");
-            return; //@TODO Trocar mecanismo que retorne erro
         }
         //Fim da Fase de Quebra
         //System.out.println(diag); //Remover depois
         //Fase de Checagem
         //Checagem de condição de parada antes da reiteração (perguntas vão parar aqui se uma das condições for cumprida)
-        if(DiagMatrix.verify(diag) == 0) { //Se há apenas 1 array não-vazio...
-            //System.out.println("Condição 0 acionada."); //Remover depois...
+        if(DiagMatrix.verify(diag) == 0 && dataIncreaseActive == 0) { //Se há apenas 1 array não-vazio...
+            //System.out.println("Condição 0 acionada.");
             for (int a = 0; a < diag.size(); a++) { //Percorre diag e o diagnóstico é esse array-não vazio;
                 if (diag.get(a).isEmpty() == false) {
                     result = diag.get(a);
@@ -91,9 +96,9 @@ public class ADoctor implements IADoctor {
                 }
             }
             endInterview();
-        }else if(DiagMatrix.verify(diag) == 1){ //Se há 2 ou mais arrays não-vazios...
+        }else if(DiagMatrix.verify(diag) == 1 && dataIncreaseActive == 0){ //Se há 2 ou mais arrays não-vazios...
             //DEV-B
-            //System.out.println("Condição 1 acionada."); //Remover depois...
+            //System.out.println("Condição 1 acionada.");
             for(int b = 0; b < diag.size(); b++) {
                 if(diag.get(b).isEmpty() == false) {
                     if (firstArraySet == 0) {
@@ -125,15 +130,60 @@ public class ADoctor implements IADoctor {
                 curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
             }
         }else if(DiagMatrix.verify(diag) == 2){ //Se todos os arrays são vazios...
-            //System.out.println("Condição 2 acionada."); //Remover depois...
+            System.out.println("Condição 2 acionada.");
             //System.out.println("All arrays are void... Insert databuild engine here.");
-            result.add("Doença não identificada");
-            endInterview();
+            if(dataIncreaseActive == 0) {
+                curPatient.ask("Verifiquei que um caso como o seu não está incluído no banco de dados da ASCLEPIUS.\nVocê gostaria de contribuir com nosso banco de dados?");
+            }else{
+                if(curPatient.getCurSym() != (ivTree.requestAttributes().length - 1)) {
+                    curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
+                }else{
+                    ArrayList<String> symVec = curPatient.getSymVec();
+
+                    String newData = "";
+                    for (int k = 0; k < symVec.size(); k++) {
+                        newData = newData + symVec.get(k) + ",";
+                    }
+                    newData = newData + "Doença de " + curPatient.getName();
+
+                    try {
+                        FileWriter dataFile = new FileWriter(SetConstants.getDefaultSource(), true);
+                        PrintWriter dataWriter = new PrintWriter(dataFile);
+                        dataWriter.println(newData);
+                        dataWriter.close();
+                        result.add("Obrigado por contribuir com o banco de dados da ASCLEPIUS! Até mais!");
+                        endInterview();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        symVec.clear();
+                    }
+                }
+            }
         }else{
-            //System.out.println("Condição 3 acionada - ERRO."); //Remover depois...
+            //System.out.println("Condição 3 acionada - ERRO.");
             //System.out.println("ERROR: Something went wrong during DiagMatrix's verify(); - bad list.");
-            result.add("Que porra é essa");
+            result.add("ERROR_CONDITION_3_TRIGGERED");
         }
+    }
+
+    public void dataIncrease(int value){ //Use 1 para incrementar e 0 para não incrementar o csv
+        if(value == 0){
+            result.add("dataIncreaseNegated");
+            endInterview();
+        }else if(value == 1){
+            dataIncreaseActive = 1;
+
+            if(curPatient.getCurSym() != (ivTree.requestAttributes().length - 1)) {
+                curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
+            }
+        }else{
+            System.out.println("ERROR: dataIncrease() has received an invalid entry - bad value.");
+        }
+    }
+
+    public int getDataIncreaseStatus(){
+        return this.dataIncreaseActive;
     }
 }
 

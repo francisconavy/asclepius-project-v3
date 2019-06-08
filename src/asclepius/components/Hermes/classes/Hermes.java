@@ -62,7 +62,6 @@ public class Hermes implements IHermes {
         if(text.equalsIgnoreCase("/start")) {
             if(pCont == 0) {
                 patients.get(patients.size() - 1).hi(messenger.getName(), chat_id);
-                //System.out.println("entrei aqui");
                 pCont++;
             }
             else{
@@ -82,8 +81,7 @@ public class Hermes implements IHermes {
                 patients.add(p);
 
                 patients.get(patients.size() - 1).hi(messenger.getName(), chat_id);
-                //System.out.println("---- " + patients.get(patients.size() -1).getChatID() + " " +
-                 //       patients.get(patients.size() -1).getName()  + " ----");
+
                 pCont++;
             }
         }
