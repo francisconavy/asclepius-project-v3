@@ -74,6 +74,10 @@ public class APatient implements IAPatient {
         }
     }
 
+    public void itsAJoke(String joke){
+        hermes.takeIn(joke, chatID);
+    }
+
     @Override
     public void tellDisease() {
         ArrayList<String> result = getDoc().getResult();

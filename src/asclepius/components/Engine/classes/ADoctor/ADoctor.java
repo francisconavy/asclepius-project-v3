@@ -1,5 +1,6 @@
 package asclepius.components.Engine.classes.ADoctor;
 
+import asclepius.components.ClownCare.classes.ClownCare;
 import asclepius.components.Engine.classes.TBC.DataTree;
 import asclepius.components.Engine.classes.TBC.DiagMatrix;
 import asclepius.components.Engine.constants.SetConstants;
@@ -30,6 +31,9 @@ public class ADoctor implements IADoctor {
     private int firstArraySet = 0, stoppingCondition = 0, nonVoidFound = 0; ArrayList<String> curArray = null; //Usado na condição código 1
     private ArrayList<String> result = new ArrayList<>();
     private int dataIncreaseActive = 0;
+
+    private ClownCare clown = new ClownCare();
+    private String joke;
 
     public ITree getIvTree(){
         return ivTree;
@@ -127,6 +131,9 @@ public class ADoctor implements IADoctor {
                 firstArraySet = 0;
                 stoppingCondition = 0;
                 nonVoidFound = 0;
+                joke = clown.randJoke(33);
+                if(joke!=null)
+                    curPatient.itsAJoke(joke);
                 curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
             }
         }else if(DiagMatrix.verify(diag) == 2){ //Se todos os arrays são vazios...

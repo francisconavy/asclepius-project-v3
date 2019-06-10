@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public interface IAPatient {
     void ask(String question);
+    void itsAJoke(String joke);
     void tellDisease();
     int getCurSym();
 
