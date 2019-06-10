@@ -62,3 +62,63 @@ Os métodos dessa inteface tem como obejtivo testar o pleno funcionamento da ár
 Método | Objetivo
 -------| --------
 `treePrint` | `Imprime a árvore. Funcionalidade para testes.`
+
+## Componente: ClownCare
+
+Campo | Valor
+----- | -----
+Classe | `asclepius.components.ClownCare.classes.ClownCare`
+Autores | `Francisco Vicente`
+Objetivo | `Banco de dados de piadas, que tem como objetivo deixar a consulta mais descontraida`
+Interface | `IClownCare`
+
+### Interface `IClownCare`
+
+Método | Objetivo
+-------|---------
+`addJoke` | Adiciona uma piada no txt
+`randJoke` | Dependendo da porcentagem setada, retorna uma das piadas que está no txt
+
+## Componente: Hermes
+
+Campo | Valor
+----- | -----
+Classe | `asclepius.components.Hermes.classes.Hermes`
+Autores | `Francisco Vicente & Hitalo Cesar`
+Objetivo | `Fazer a comunicação entre os pacientes e um mensageiro (como o Telegram)`
+Interface | `IHermes`
+
+### Interface `IHermes`
+
+Método | Objetivo
+-------|---------
+`disconnect` | Desconectar pacientes que não estão mais em consulta
+`connect` | Conectar novos pacientes que entrarão em consulta
+`takeOut` | Recebe como parâmetro uma string e um id, e deve levar uma mensagem para o paciente com o id
+`takeIn` | Recebe como parâmetro uma string e um id, e deve levar uma mensagem para o mensageiro.
+`takeIn` | Recebe como parâmetro uma string, um vetor de strings e um id. Deve levar uma mensagem para o mensageiro, além de setar quais serão os botões que o mensageiro deve criar.
+
+## Componente: Telegram
+
+Campo | Valor
+----- | -----
+Classe | `asclepius.components.TLG.classes.TLG & asclepius.components.TLG.classes.StartTLG`
+Autores | `Francisco Vicente & Hitalo Cesar`
+Objetivo | `Fazer a comunicação entre usuários e o hermes`
+Interface | `asclepius.components.TLG.interfaces.ITLG & asclepius.components.TLG.interfaces.IStartTLG`
+
+### Interface `ITLG`
+
+Método | Objetivo
+-------|---------
+`connect` | Recebe um hermes e o conecta com o Telegram.
+`getName` | Retorna o nome do ultimo paciente que mandou uma mensagem.
+`getChatID` | Retorna o ID do ultimo paciente que mandou mensagem.
+`sendText` | Recebe como parametro uma string e um ID e manda uma mensagem pro usuário certo.
+`sendText` | Recebe como parâmetro uma string, um vetor de Strings e um ID, e manda uma mensagem pro usuário certo, além de setar o teclado com os botões.
+
+### Interface `IStartTLG`
+
+Método | Objetivo
+-------|---------
+`start` | Inicia o bot

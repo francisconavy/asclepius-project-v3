@@ -20,7 +20,7 @@ public class ClownCare implements IClownCare {
                 linha = formatado.readLine();
             }
             formatado.close();
-            System.out.println("Piadas adicionadas no array com sucesso!");
+            //System.out.println("Piadas adicionadas no array com sucesso!");
         }catch (IOException e){
             System.out.println("Nao foi possivel abrir o arquivo 'jokes.txt'");
         }

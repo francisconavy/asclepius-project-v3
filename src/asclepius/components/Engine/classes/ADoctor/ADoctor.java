@@ -61,6 +61,7 @@ public class ADoctor implements IADoctor {
 
     public void getDiagnosis(){
         curPatient.ask("Irei te fazer algumas perguntas, e preciso que responda com 'sim' ou 'não', por favor.");
+        curPatient.itsAJoke("Mas antes, vota no IC na rinha");
         curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
     }
 
@@ -131,13 +132,13 @@ public class ADoctor implements IADoctor {
                 firstArraySet = 0;
                 stoppingCondition = 0;
                 nonVoidFound = 0;
-                joke = clown.randJoke(33);
+                joke = clown.randJoke(20);
                 if(joke!=null)
                     curPatient.itsAJoke(joke);
                 curPatient.ask(ivTree.requestAttributes()[curPatient.getCurSym()]);
             }
         }else if(DiagMatrix.verify(diag) == 2){ //Se todos os arrays são vazios...
-            System.out.println("Condição 2 acionada.");
+            //System.out.println("Condição 2 acionada.");
             //System.out.println("All arrays are void... Insert databuild engine here.");
             if(dataIncreaseActive == 0) {
                 curPatient.ask("Verifiquei que um caso como o seu não está incluído no banco de dados da ASCLEPIUS.\nVocê gostaria de contribuir com nosso banco de dados?");
