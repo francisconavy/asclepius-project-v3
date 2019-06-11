@@ -37,7 +37,6 @@ public class ADoctor implements IADoctor {
     
 
     public void connect(IAPatient targetPatient){
-        //System.out.println(diag); //Remover depois
         curPatient = targetPatient;
     }
 
@@ -86,7 +85,7 @@ public class ADoctor implements IADoctor {
             }
         }
         //Fim da Fase de Quebra
-        //System.out.println(diag); //Remover depois
+
         //Fase de Checagem
         //Checagem de condição de parada antes da reiteração (perguntas vão parar aqui se uma das condições for cumprida)
         if(DiagMatrix.verify(diag) == 0 && dataIncreaseActive == 0) { //Se há apenas 1 array não-vazio...
@@ -166,8 +165,7 @@ public class ADoctor implements IADoctor {
                 }
             }
         }else{
-            //System.out.println("Condição 3 acionada - ERRO.");
-            //System.out.println("ERROR: Something went wrong during DiagMatrix's verify(); - bad list.");
+            //Condição 3 acionada - ERRO
             result.add("ERROR_CONDITION_3_TRIGGERED");
         }
     }

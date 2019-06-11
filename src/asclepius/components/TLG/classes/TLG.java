@@ -34,7 +34,6 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         this.text = update.getMessage().getText();
         this.name = update.getMessage().getFrom().getFirstName();
         this.chat_id = update.getMessage().getChatId();
-        //System.out.println("@TELEGRAM: "+text);
         hermes.takeOut(text, chat_id);
     }
 
