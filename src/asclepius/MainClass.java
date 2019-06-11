@@ -1,14 +1,17 @@
 package asclepius;
 
+import asclepius.components.GraficosComplemento.*;
 import asclepius.components.Engine.classes.ADoctor.ADoctor;
 import asclepius.components.Engine.classes.APatient.APatient;
-import asclepius.components.Engine.classes.DSC.DataSetComponent;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
-import asclepius.components.Engine.interfaces.DSC.IDataSet;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.TLG.interfaces.ITLG;
+
+import drauziumbi.Grafico;
+import zumbi.Componentes.Supervisor.FabricaSupervisor;
+import zumbi.Interfaces.ISupervisor.ISupervisor;
 
 public class MainClass{
     public static void main(String[] args){
@@ -26,8 +29,8 @@ public class MainClass{
         hermes.connect(telegrambot);
 
         // instanciando o componente DataSet
-        IDataSet dataset = new DataSetComponent();
-        dataset.setDataSource("resources/data/zombie-health-spreadsheet-ml-training.csv");
+        //IDataSet dataset = new DataSetComponent();
+        //dataset.setDataSource("resources/data/zombie-health-spreadsheet-ml-training.csv");
 
         // instanciando o componente paciente
         IAPatient aPatient = new APatient();
@@ -52,5 +55,12 @@ public class MainClass{
 
         //conectando o paciente ao doutor
         aPatient.connect(cDoctor);
+        //IDataSet a = new DatasetComponent();
+
+        //IDataSet
+
+        //Grafico grafico1 = new Grafico(vetorPacientes);
+        //Grafico grafico2 = new Grafico(vetorPacientes);
+
     }
 }

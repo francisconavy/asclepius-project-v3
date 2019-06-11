@@ -7,8 +7,9 @@ import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Engine.interfaces.TBC.ITree;
-import asclepius.components.Engine.interfaces.all.IResponder;
-import asclepius.components.Engine.interfaces.all.ITableProducer;
+import drauziumbi.Grafico;
+import zumbi.Componentes.Supervisor.FabricaSupervisor;
+import zumbi.Interfaces.ISupervisor.ISupervisor;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,11 +19,6 @@ import java.util.List;
 
 public class ADoctor implements IADoctor {
     private IAPatient curPatient;
-    private ITableProducer producer;
-    private IResponder responder;
-    private String[] diagnostic;
-    private int num_sym;
-    private String attributes[];
 
     private ITree ivTree = DataTree.generate(SetConstants.getDefaultSource());
     private ArrayList<ArrayList<String>> diag = ivTree.diagCheck();
@@ -34,10 +30,13 @@ public class ADoctor implements IADoctor {
 
     private ClownCare clown = new ClownCare();
     private String joke;
+    private ISupervisor motivador = FabricaSupervisor.criarSupervisor();
 
     public ITree getIvTree(){
         return ivTree;
     }
+
+    
 
     public void connect(IAPatient targetPatient){
         //System.out.println(diag); //Remover depois
@@ -45,7 +44,7 @@ public class ADoctor implements IADoctor {
     }
 
     public void startInterview(){
-        curPatient.ask("Olá "+curPatient.getName()+"!\nVamos iniciar a consulta?");
+        curPatient.ask("Olá "+curPatient.getName()+"!!\n"+motivador.strMotivar()+"\nVamos iniciar a consulta?");
     }
 
     public void endInterview(){
