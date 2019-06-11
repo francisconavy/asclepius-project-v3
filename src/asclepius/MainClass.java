@@ -24,10 +24,6 @@ public class MainClass{
         //conecta hermes ao telegram
         hermes.connect(telegrambot);
 
-        // instanciando o componente DataSet
-        //IDataSet dataset = new DataSetComponent();
-        //dataset.setDataSource("resources/data/zombie-health-spreadsheet-ml-training.csv");
-
         // instanciando o componente paciente
         IAPatient aPatient = new APatient();
 
