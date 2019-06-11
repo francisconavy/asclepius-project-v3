@@ -112,7 +112,7 @@ public class Hermes implements IHermes {
         IProntuario pront = new Prontuario("Asclepius", this.findPatient(chat_id).getName(), text);
         IImprimeAtestado atest = new ImprimeAtestado(pront);
         atest.imprime("resources/atestados/");
-        messenger.sendDocument("resources/atestados/atestado1.pdf", chat_id);
+        messenger.sendDocument("resources/atestados/atestado1.pdf", "atestado.pdf",  chat_id);
         File arq = new File("resources/atestados/atestado1.pdf");
         arq.delete();
     }

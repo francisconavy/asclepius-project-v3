@@ -73,11 +73,11 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
         }
     }
 
-    public void sendDocument(String file, long chatID){
+    public void sendDocument(String file, String name, long chatID){
         InputStream inputStream;
         try {
             inputStream = new FileInputStream(file);
-            SendDocument message = new SendDocument().setDocument("Atestado", inputStream);
+            SendDocument message = new SendDocument().setDocument(name, inputStream);
             message.setChatId(chatID);
             execute(message);
         }catch (Exception e){
