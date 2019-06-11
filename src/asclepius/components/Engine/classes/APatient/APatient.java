@@ -84,7 +84,8 @@ public class APatient implements IAPatient {
 
         if(dataIncreaseActive == 0) {
             if(result.contains("dataIncreaseNegated") == false) {
-                String msg = "Diagnóstico concluído:\nVocê está com ";
+                String msg1 = "Diagnóstico concluído:\nVocê está com ";
+                String msg="";
                 for (int i = 0; i < result.size(); i++) {
                     msg = msg + result.get(i);
 
@@ -101,7 +102,7 @@ public class APatient implements IAPatient {
                     }
                 }
                 String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
-                hermes.takeIn(msg, teclado, chatID);
+                hermes.takeIn(msg1+msg, teclado, chatID);
                 hermes.takeInAt(msg, chatID);
             } else {
                 String msg = "Você não quer ajudar? Certo. Tenha um bom dia e não espere por mim quando estiver morrendo!\n^^";

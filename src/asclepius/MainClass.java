@@ -2,21 +2,16 @@ package asclepius;
 
 import asclepius.components.Engine.classes.ADoctor.ADoctor;
 import asclepius.components.Engine.classes.APatient.APatient;
-import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
-import asclepius.components.GraficosComplemento.DataSetComponent;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.TLG.interfaces.ITLG;
-
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import drauziumbi.Grafico;
 
 
 public class MainClass{
     public static void main(String[] args){
-
 
         //Iniciando a interface do telegram
         StartTLG telegramStarter = new StartTLG();

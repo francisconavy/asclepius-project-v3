@@ -109,7 +109,7 @@ public class Hermes implements IHermes {
     }
 
     public void takeInAt(String text, long chat_id){
-        IProntuario pront = new Prontuario("Asclepius", this.findPatient(chat_id).getName(), text);
+        IProntuario pront = new Prontuario(text, this.findPatient(chat_id).getName(), "Asclepius");
         IImprimeAtestado atest = new ImprimeAtestado(pront);
         atest.imprime("resources/atestados/");
         messenger.sendDocument("resources/atestados/atestado1.pdf", "atestado.pdf",  chat_id);
