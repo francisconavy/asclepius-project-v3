@@ -5,14 +5,13 @@ import asclepius.components.ClownCare.interfaces.IClownCare;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class ClownCare implements IClownCare {
     private ArrayList<String> jokes = new ArrayList<>();
 
     public ClownCare() {
         try {
-            FileReader arquivo = new FileReader("resources/jokes.txt");
+            FileReader arquivo = new FileReader("src/asclepius/components/ClownCare/jokes.txt");
             BufferedReader formatado = new BufferedReader(arquivo);
             String linha = formatado.readLine();
             while(linha!=null){
@@ -26,7 +25,7 @@ public class ClownCare implements IClownCare {
     }
     public void addJoke(String joke){
         try {
-            FileWriter arquivo = new FileWriter("resources/jokes.txt", true);
+            FileWriter arquivo = new FileWriter("src/asclepius/ClownCare/jokes.txt", true);
             PrintWriter formatado = new PrintWriter(arquivo);
             if(!jokes.contains(joke)) {
                 formatado.println(joke);

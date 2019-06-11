@@ -7,7 +7,6 @@ import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.TLG.interfaces.ITLG;
-import drauziumbi.Grafico;
 
 
 public class MainClass{
