@@ -1,7 +1,7 @@
 package asclepius.components.GraficosComplemento;
 
 //-------------------------------------------------------------------------------------------------//
-class Doencas{
+public class Doencas{
     private String nome;
     private int frequencia;
 

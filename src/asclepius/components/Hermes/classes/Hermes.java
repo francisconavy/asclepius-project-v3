@@ -6,7 +6,12 @@ import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Hermes.interfaces.IHermes;
 import asclepius.components.TLG.interfaces.ITLG;
+import jsmaiorjava.implementations.ImprimeAtestado;
+import jsmaiorjava.implementations.Prontuario;
+import jsmaiorjava.interfaces.IImprimeAtestado;
+import jsmaiorjava.interfaces.IProntuario;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +65,8 @@ public class Hermes implements IHermes {
 
     public void takeOut(String text, long chat_id){
         if(text.equalsIgnoreCase("/start")) {
+            messenger.sendImage("resources/images/symbol.png", chat_id);
+
             if(pCont == 0) {
                 patients.get(patients.size() - 1).hi(messenger.getName(), chat_id);
                 pCont++;
@@ -86,8 +93,12 @@ public class Hermes implements IHermes {
             }
         }
         else {
+            if(findPatientID(chat_id) == -1){
+                String[][] teclado = {{"/start"}};
+                takeIn("Precione /start para começar a consulta", teclado, chat_id);
+                return;
+            }
             IAPatient patient = findPatient(chat_id);
-            //System.out.println(chat_id + " " +  patient.getName() + " " + patient.getChatID());
             patient.understand(text);
         }
     }
@@ -97,10 +108,16 @@ public class Hermes implements IHermes {
         messenger.sendText(text, teclado, chat_id);
     }
 
+    public void takeInAt(String text, long chat_id){
+        IProntuario pront = new Prontuario("Asclepius", this.findPatient(chat_id).getName(), text);
+        IImprimeAtestado atest = new ImprimeAtestado(pront);
+        atest.imprime("resources/atestados/");
+        messenger.sendDocument("resources/atestados/atestado1.pdf", chat_id);
+        File arq = new File("resources/atestados/atestado1.pdf");
+        arq.delete();
+    }
+
     public void takeIn(String text, long chat_id){
         messenger.sendText(text, chat_id);
     }
-
-
-
 }

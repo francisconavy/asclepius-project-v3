@@ -16,6 +16,7 @@ public interface ITLG {
     void sendText(String text, long chatID);
     void sendText(String text, String[][] teclado, long chatID);
     void sendImage(String file, long chatID);
+    void sendDocument(String file, long chatID);
 
 
 }

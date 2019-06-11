@@ -21,7 +21,7 @@ import java.util.Random;
 import java.lang.String;
 
 
-class Sintomas{
+public class Sintomas{
     private String nome;
     private int frequencia;
 

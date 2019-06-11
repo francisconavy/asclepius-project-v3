@@ -7,7 +7,6 @@ import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Hermes.interfaces.IHermes;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class APatient implements IAPatient {
 
@@ -103,6 +102,7 @@ public class APatient implements IAPatient {
                 }
                 String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
                 hermes.takeIn(msg, teclado, chatID);
+                hermes.takeInAt(msg, chatID);
             } else {
                 String msg = "Você não quer ajudar? Certo. Tenha um bom dia e não espere por mim quando estiver morrendo!\n^^";
                 String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
@@ -112,6 +112,7 @@ public class APatient implements IAPatient {
             String msg = "" + result.get(0);
             String[][] teclado = {{"Nova consulta"}, {"Encerrar consulta"}};
             hermes.takeIn(msg, teclado, chatID);
+            hermes.takeInAt(msg, chatID);
         }
     }
 
@@ -151,6 +152,9 @@ public class APatient implements IAPatient {
         }
         else if (text.equalsIgnoreCase("Não, obrigado...")) {
             doctor.dataIncrease(0);
+        }
+        else{
+            hermes.takeIn("Não consegui te entender, você poderia responder à pergunta feita anteriormente utilizando os botões por favor?", chatID);
         }
     }
 

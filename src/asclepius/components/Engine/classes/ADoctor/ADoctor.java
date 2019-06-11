@@ -7,7 +7,6 @@ import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
 import asclepius.components.Engine.interfaces.TBC.ITree;
-import drauziumbi.Grafico;
 import zumbi.Componentes.Supervisor.FabricaSupervisor;
 import zumbi.Interfaces.ISupervisor.ISupervisor;
 
@@ -15,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ADoctor implements IADoctor {
     private IAPatient curPatient;

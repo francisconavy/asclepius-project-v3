@@ -1,20 +1,22 @@
 package asclepius;
 
-import asclepius.components.GraficosComplemento.*;
 import asclepius.components.Engine.classes.ADoctor.ADoctor;
 import asclepius.components.Engine.classes.APatient.APatient;
+import asclepius.components.Engine.constants.SetConstants;
 import asclepius.components.Engine.interfaces.ADoctor.IADoctor;
 import asclepius.components.Engine.interfaces.APatient.IAPatient;
+import asclepius.components.GraficosComplemento.DataSetComponent;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.TLG.classes.StartTLG;
 import asclepius.components.TLG.interfaces.ITLG;
 
-import drauziumbi.Grafico;
-import zumbi.Componentes.Supervisor.FabricaSupervisor;
-import zumbi.Interfaces.ISupervisor.ISupervisor;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 
 public class MainClass{
     public static void main(String[] args){
+
 
         //Iniciando a interface do telegram
         StartTLG telegramStarter = new StartTLG();
@@ -55,12 +57,9 @@ public class MainClass{
 
         //conectando o paciente ao doutor
         aPatient.connect(cDoctor);
-        //IDataSet a = new DatasetComponent();
 
-        //IDataSet
-
-        //Grafico grafico1 = new Grafico(vetorPacientes);
-        //Grafico grafico2 = new Grafico(vetorPacientes);
 
     }
+
+
 }

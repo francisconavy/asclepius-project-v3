@@ -1,8 +1,12 @@
 package asclepius.components.GraficosComplemento;
 
+
+import asclepius.components.GraficosComplemento.IPatient;
+import asclepius.components.GraficosComplemento.ITableProducer;
+
 import java.util.Random;
 
-class Patient implements IPatient{
+public class Patient implements IPatient {
     private String[]   gabarito;
     private String[]   attributes;
     private ITableProducer ds;
@@ -46,6 +50,10 @@ class Patient implements IPatient{
 
     public int getDoenca() {
         return doenca;
+    }
+
+    public void setDoenca(int doenca) {
+        this.doenca = doenca;
     }
 
     public String[] getGabarito() {

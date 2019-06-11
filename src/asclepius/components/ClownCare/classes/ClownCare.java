@@ -20,7 +20,6 @@ public class ClownCare implements IClownCare {
                 linha = formatado.readLine();
             }
             formatado.close();
-            //System.out.println("Piadas adicionadas no array com sucesso!");
         }catch (IOException e){
             System.out.println("Nao foi possivel abrir o arquivo 'jokes.txt'");
         }
@@ -45,7 +44,6 @@ public class ClownCare implements IClownCare {
     public String randJoke(int percent){
         Random gerador = new Random();
         int aleatorio = gerador.nextInt(101);
-        //System.out.println(aleatorio);
         if(percent > aleatorio){
             return jokes.get(gerador.nextInt(jokes.size()));
         }

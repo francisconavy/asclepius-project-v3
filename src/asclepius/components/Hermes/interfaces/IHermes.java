@@ -10,4 +10,5 @@ public interface IHermes {
     void takeOut(String text, long chat_id);
     void takeIn(String text, long chat_id);
     void takeIn(String text, String[][] teclado, long chat_id);
+    void takeInAt(String text, long chat_id);
 }

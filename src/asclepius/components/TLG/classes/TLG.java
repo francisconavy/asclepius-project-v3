@@ -3,6 +3,7 @@ package asclepius.components.TLG.classes;
 import asclepius.components.Hermes.classes.Hermes;
 import asclepius.components.TLG.interfaces.ITLG;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -68,6 +69,18 @@ public class TLG extends TelegramLongPollingBot implements ITLG{
             message.setChatId(chatID);
             execute(message);
         }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void sendDocument(String file, long chatID){
+        InputStream inputStream;
+        try {
+            inputStream = new FileInputStream(file);
+            SendDocument message = new SendDocument().setDocument("Atestado", inputStream);
+            message.setChatId(chatID);
+            execute(message);
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
