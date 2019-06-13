@@ -97,6 +97,7 @@ Método | Objetivo
 `takeOut` | Recebe como parâmetro uma string e um id, e deve levar uma mensagem para o paciente com o id
 `takeIn` | Recebe como parâmetro uma string e um id, e deve levar uma mensagem para o mensageiro.
 `takeIn` | Recebe como parâmetro uma string, um vetor de strings e um id. Deve levar uma mensagem para o mensageiro, além de setar quais serão os botões que o mensageiro deve criar.
+`takeInAt`| Recebe como parâmetro uma string e um id. Cria um atestado e envia para o mensageiro.
 
 ## Componente: Telegram
 
@@ -116,6 +117,8 @@ Método | Objetivo
 `getChatID` | Retorna o ID do ultimo paciente que mandou mensagem.
 `sendText` | Recebe como parametro uma string e um ID e manda uma mensagem pro usuário certo.
 `sendText` | Recebe como parâmetro uma string, um vetor de Strings e um ID, e manda uma mensagem pro usuário certo, além de setar o teclado com os botões.
+`sendImage` | Recebe como parametro o path de uma imagem e o ID do usuario, e envia a imagem para o devido usuário
+`sendDocuments` | Recebe como parametro o path de um documento, uma string que é o nome do arquivo e o ID do usuário, para enviar o documento para o usuário correto
 
 ### Interface `IStartTLG`
 
